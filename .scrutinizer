@@ -1,0 +1,26 @@
+filter:
+  paths:
+    - "src/"
+  dependency_paths:
+    - "vendor/"
+
+checks:
+  php:
+    code_rating: true
+    duplication: true
+
+build:
+    environment:
+        php:
+            version: 7.1
+    tests:
+        override:
+            -
+                command: 'make test-coverage'
+                coverage:
+                    file: 'coverage/clover.xml'
+                    format: 'php-clover'
+
+build_failure_conditions:
+    - 'issues.new.exists'
+    - 'project.metric_change("scrutinizer.test_coverage", < -0.05)'
