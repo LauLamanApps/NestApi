@@ -53,10 +53,10 @@ abstract class AbstractFactory
         $dateTime = $this->extractStringOrNull($key, $data);
 
         if ($dateTime) {
-            $dateTime = new DateTimeImmutable($dateTime);
+            return new DateTimeImmutable($dateTime);
         }
 
-        return $dateTime;
+        return null;
     }
 
     private function extractOrNull(string $key, array $data)

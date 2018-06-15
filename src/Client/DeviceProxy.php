@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LauLamanApps\NestApi\Client;
 
+use LauLamanApps\NestApi\Client\Device\Camera;
 use LauLamanApps\NestApi\Client\Device\Protect;
 use LauLamanApps\NestApi\Client\Device\Thermostat;
 use LauLamanApps\NestApi\NestClient;
@@ -25,6 +26,9 @@ abstract class DeviceProxy
      */
     private $__device;
 
+    /**
+     * @return Thermostat|Protect|Camera
+     */
     public function __construct(NestClient $client, $deviceId)
     {
         $this->__deviceId = $deviceId;

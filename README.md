@@ -2,9 +2,9 @@ Nest Api
 ===============
 This package provides a simple integration of the [Official Nest Api][nest-api-documentation] for your PHP project.
 
-[![Build Status](https://scrutinizer-ci.com/g/LauLamanApps/nest-api/badges/build.png?b=master)](https://scrutinizer-ci.com/g/LauLamanApps/nest-api/build-status/master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/LauLamanApps/nest-api/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/LauLamanApps/nest-api/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/LauLamanApps/nest-api/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/LauLamanApps/nest-api/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/LauLamanApps/NestApi/badges/build.png?b=master)](https://scrutinizer-ci.com/g/LauLamanApps/NestApi/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/LauLamanApps/NestApi/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/LauLamanApps/NestApi/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/LauLamanApps/NestApi/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/LauLamanApps/NestApi/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/LauLamanApps/nest-api/v/stable)](https://packagist.org/packages/LauLamanApps/nest-api)
 [![License](https://poser.pugx.org/LauLamanApps/nest-api/license)](https://packagist.org/packages/LauLamanApps/nest-api)
 
