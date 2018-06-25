@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LauLamanApps\NestApi\Client\Device\Factory;
+namespace LauLamanApps\NestApi\Client\Factory\Device;
 
 use DateTimeImmutable;
 use LauLamanApps\NestApi\Client\__shared\AbstractFactory;
@@ -10,11 +10,11 @@ use LauLamanApps\NestApi\Client\Device\Thermostat;
 use LauLamanApps\NestApi\Client\Device\Thermostat\HvacMode;
 use LauLamanApps\NestApi\Client\Device\Thermostat\HvacState;
 use LauLamanApps\NestApi\Client\Device\Thermostat\Temperature\Scale;
-use LauLamanApps\NestApi\NestClient;
+use LauLamanApps\NestApi\NestClientInterface;
 
 final class ThermostatFactory extends AbstractFactory implements ThermostatFactoryInterface
 {
-    public function fromData(array $data, NestClient $client): Thermostat
+    public function fromData(array $data, NestClientInterface $client): Thermostat
     {
         $scale = Scale::get($this->extractString('temperature_scale', $data));
 

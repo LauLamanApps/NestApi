@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace LauLamanApps\NestApi\Client\Device\Factory;
+namespace LauLamanApps\NestApi\Client\Factory\Device;
 
 use DateTimeImmutable;
 use LauLamanApps\NestApi\Client\__shared\AbstractFactory;
 use LauLamanApps\NestApi\Client\Device\Camera;
-use LauLamanApps\NestApi\Client\Device\Factory\Camera\EventFactoryInterface;
+use LauLamanApps\NestApi\Client\Factory\Device\Camera\EventFactoryInterface;
 use LauLamanApps\NestApi\NestClient;
 
 final class CameraFactory extends AbstractFactory implements CameraFactoryInterface
@@ -22,7 +22,7 @@ final class CameraFactory extends AbstractFactory implements CameraFactoryInterf
         $this->eventFactory = $eventFactory;
     }
 
-    public function fromData(array $data, NestClient $client): Camera
+    public function fromData(array $data): Camera
     {
         return new Camera(
             $this->extractString('device_id', $data),

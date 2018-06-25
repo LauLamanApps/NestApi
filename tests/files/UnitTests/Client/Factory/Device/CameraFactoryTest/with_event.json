@@ -1,0 +1,22 @@
+{
+  "name": "Living Room (310c)",
+  "software_version": "1.0.2",
+  "where_id": "v1H46Ty8xdp1WpWCpLD_i6QmUY8QdS0HRhLRy92_VdCkkcxb8oJweA",
+  "device_id": "lBNwmDa69ZN-Ylu4sDRMDphCSZ4Aguam0nvkw9EgpIFFOQPRTdWZEg",
+  "structure_id": "bneXA9XGiCsodhqwIcdgEkpnQJKP67pgoa8XhK_IIziNv4vXR0GXkg",
+  "is_online": true,
+  "is_streaming": false,
+  "is_audio_input_enabled": true,
+  "last_is_online_change": "2015-08-03T04:05:06.000Z",
+  "is_video_history_enabled": true,
+  "last_event": {
+    "has_sound": true,
+    "has_motion": false,
+    "has_person": true,
+    "start_time": "2018-06-14T18:09:41.000Z",
+    "end_time": "2018-06-14T18:09:33.000Z"
+  },
+  "name_long": "Living Room Camera (310c)",
+  "web_url": "https://home.nest.com/cameras/CjZsQk53bURhNjlaTi1ZbHU0c0RSTURwaENTWjRBZ3VhbTBudmt3OUVncElGRk9RUFJUZFdaRWcSFlJjZGxhTmg3Rk9ITkZNWm9iZzMxaHcaNjc3aEhmWmtrS2NZQ1VGWS1XOHlJN0R1TUR3TkNZb2hwTVRIVXdJV2hnbmpyNWNpVVRRYXFnZw?auth=594RhxcBzLP-cQpgMgGjrWE_ssNPb_DQVNoW_CwGZhz6yNy6_8nySA4C7Tuy25br2bj89izmBU4xvv5v4VmbBOboFsNK2Io_hT9PhOlTOzRoy47lfPRH-LdXlYyf2aEtgWFTQZ8zODSW7me3U-Jf-LL3NQYfvs9EN2kaVyjFWP5vud-XYtLPUUM68MlDKSY2U1rZa4OrQEgQws",
+  "app_url": "nestmobile://cameras/CjZsQk53bURhNjlaTi1ZbHU0c0RSTURwaENTWjRBZ3VhbTBudmt3OUVncElGRk9RUFJUZFdaRWcSFlJjZGxhTmg3Rk9IWVdSaHBfUHpSLUEaNjc3aEhmWmtrS2NZQ1VGWS1XOHlJN0R1TUR3TkNZb2hwTVRIVXdJV2hnbmpyNWNpVVRRYXFnZw?auth=594RhxcBzLP-cQpgMgGjrWE_ssNPb_DQVNoW_CwGZhz6yNy6_8nySA4C7Tuy25br2bj89izmBU4xvv5v4VmbBOboFsNK2Io_hT9PhOlTOzRoy47lfPRH-LdXlYyf2aEtgWFTQZ8zODSW7me3U-Jf-LL3NQYfvs9EN2kaVyjFWP5vud-XYtLPUUM68MlDKSY2U1rZa4OrQEgQws"
+}

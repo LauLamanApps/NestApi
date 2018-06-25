@@ -44,13 +44,11 @@ final class Temperature
      */
     public function getDegrees()
     {
-        if ($this->scale->isFahrenheit()) {
-            return (int) $this->degrees;
-        }
-
         if ($this->scale->isCelsius()) {
             return self::roundCelsius($this->degrees);
         }
+
+        return (int)$this->degrees;
     }
 
     private static function roundCelsius(float $degrees): float
@@ -60,10 +58,16 @@ final class Temperature
 
     public function __toString(): string
     {
+        if ($this->scale->isCelsius()) {
+            return sprintf(
+                '%.1f°C',
+                $this->getDegrees()
+            );
+        }
+
         return sprintf(
-            '%d°%s',
-            $this->getDegrees(),
-            strtoupper($this->scale->getValue())
+            '%d°F',
+            $this->getDegrees()
         );
     }
 }

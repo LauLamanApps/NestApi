@@ -9,7 +9,7 @@ use LauLamanApps\NestApi\Client\Device\Protect\AlarmState;
 use LauLamanApps\NestApi\Client\Device\Protect\BatteryHealth;
 use LauLamanApps\NestApi\Client\Device\Protect\UiColorState;
 use LauLamanApps\NestApi\Client\DeviceProxy;
-use LauLamanApps\NestApi\NestClient;
+use LauLamanApps\NestApi\NestClientInterface;
 
 /**
  * @method string getDeviceId()
@@ -30,7 +30,7 @@ use LauLamanApps\NestApi\NestClient;
  */
 final class ProtectProxy extends DeviceProxy
 {
-    protected function __load(NestClient $client, string $deviceId)
+    protected function __load(NestClientInterface $client, string $deviceId)
     {
         return $client->getProtect($deviceId);
     }

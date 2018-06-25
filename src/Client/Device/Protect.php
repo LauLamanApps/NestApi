@@ -52,7 +52,7 @@ final class Protect
     private $online;
 
     /**
-     * @var DateTimeImmutable
+     * @var ?DateTimeImmutable
      */
     private $lastConnection;
 
@@ -95,7 +95,7 @@ final class Protect
         string $locale,
         string $softwareVersion,
         bool $online,
-        DateTimeImmutable $lastConnection,
+        ?DateTimeImmutable $lastConnection = null,
         BatteryHealth $batteryHealth,
         AlarmState $coAlarmState,
         AlarmState $smokeAlarmState,
@@ -160,7 +160,7 @@ final class Protect
         return $this->online;
     }
 
-    public function getLastConnection(): DateTimeImmutable
+    public function getLastConnection(): ?DateTimeImmutable
     {
         return $this->lastConnection;
     }

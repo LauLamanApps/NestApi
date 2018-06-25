@@ -6,6 +6,6 @@ namespace LauLamanApps\NestApi\Http\Command;
 
 interface Command
 {
-    public function getId(): string;
+    public function getDeviceId(): string;
     public function getCommands(): array;
 }

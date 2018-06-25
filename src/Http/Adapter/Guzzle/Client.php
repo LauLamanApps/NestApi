@@ -118,12 +118,17 @@ final class Client implements ClientInterface
      */
     private function wasSuccessfulRequest(ResponseInterface $response): void
     {
-        if ($response->getStatusCode() === 307) {
-            throw new RedirectException($response->getHeader('Location')[0]);
-        }
+        switch ($response->getStatusCode()) {
+            case 307:
+                throw new RedirectException($response->getHeader('Location')[0]);
 
-        if ($response->getStatusCode() <> 200) {
-            throw new ApiCallException($response-> getStatusCode() . ' ' . $response->getReasonPhrase());
+                break;
+            case 200:
+                return;
+
+                break;
+            default:
+                throw new ApiCallException($response-> getStatusCode() . ' ' . $response->getReasonPhrase());
         }
     }
 }

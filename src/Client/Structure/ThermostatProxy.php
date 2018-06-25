@@ -10,7 +10,7 @@ use LauLamanApps\NestApi\Client\Device\Thermostat\HvacState;
 use LauLamanApps\NestApi\Client\Device\Thermostat\Temperature;
 use LauLamanApps\NestApi\Client\Device\Thermostat\Temperature\Scale;
 use LauLamanApps\NestApi\Client\DeviceProxy;
-use LauLamanApps\NestApi\NestClient;
+use LauLamanApps\NestApi\NestClientInterface;
 
 /**
  * @method string getDeviceId()
@@ -52,7 +52,7 @@ use LauLamanApps\NestApi\NestClient;
  */
 final class ThermostatProxy extends DeviceProxy
 {
-    protected function __load(NestClient $client, string $deviceId)
+    protected function __load(NestClientInterface $client, string $deviceId)
     {
         return $client->getThermostat($deviceId);
     }

@@ -10,12 +10,12 @@ use LauLamanApps\NestApi\Client\Device\Thermostat\HvacState;
 use LauLamanApps\NestApi\Client\Device\Thermostat\Temperature;
 use LauLamanApps\NestApi\Client\Device\Thermostat\Temperature\Scale;
 use LauLamanApps\NestApi\Http\Command\ThermostatCommand;
-use LauLamanApps\NestApi\NestClient;
+use LauLamanApps\NestApi\NestClientInterface;
 
 final class Thermostat
 {
     /**
-     * @var NestClient
+     * @var NestClientInterface
      */
     private $client;
 
@@ -156,7 +156,7 @@ final class Thermostat
 
 
     public function __construct(
-        NestClient $nestClient,
+        NestClientInterface $nestClient,
         string $deviceId,
         string $whereId,
         string $structureId,
@@ -255,17 +255,17 @@ final class Thermostat
         return $this->softwareVersion;
     }
 
-    public function isCanHeat(): bool
+    public function canHeat(): bool
     {
         return $this->canHeat;
     }
 
-    public function isCanCool(): bool
+    public function canCool(): bool
     {
         return $this->canCool;
     }
 
-    public function isHasFan(): bool
+    public function hasFan(): bool
     {
         return $this->hasFan;
     }
@@ -300,7 +300,7 @@ final class Thermostat
         return $this->lockedTempMax;
     }
 
-    public function isHasLeaf(): bool
+    public function hasLeaf(): bool
     {
         return $this->has_leaf;
     }

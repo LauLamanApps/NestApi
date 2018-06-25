@@ -7,12 +7,15 @@ namespace LauLamanApps\NestApi\Client;
 use LauLamanApps\NestApi\Client\Device\Camera;
 use LauLamanApps\NestApi\Client\Device\Protect;
 use LauLamanApps\NestApi\Client\Device\Thermostat;
-use LauLamanApps\NestApi\NestClient;
+use LauLamanApps\NestApi\Client\Structure\CameraProxy;
+use LauLamanApps\NestApi\Client\Structure\ProtectProxy;
+use LauLamanApps\NestApi\Client\Structure\ThermostatProxy;
+use LauLamanApps\NestApi\NestClientInterface;
 
 abstract class DeviceProxy
 {
     /**
-     * @var NestClient
+     * @var NestClientInterface
      */
     private $__client;
 
@@ -22,23 +25,23 @@ abstract class DeviceProxy
     private $__deviceId;
 
     /**
-     * @var null|Thermostat|Protect
+     * @var null|Thermostat|Protect|Camera
      */
     private $__device;
 
     /**
-     * @return Thermostat|Protect|Camera
+     * @return ThermostatProxy|ProtectProxy|CameraProxy
      */
-    public function __construct(NestClient $client, $deviceId)
+    public function __construct(NestClientInterface $client, $deviceId)
     {
         $this->__deviceId = $deviceId;
         $this->__client = $client;
     }
 
     /**
-     * @return Thermostat|Protect
+     * @return Thermostat|Protect|Camera
      */
-    abstract protected function __load(NestClient $client, string $deviceId);
+    abstract protected function __load(NestClientInterface $client, string $deviceId);
 
     public function __call($method, $args)
     {

@@ -9,7 +9,7 @@ use LauLamanApps\NestApi\Http\Endpoint\Exception\EndpointCouldNotBeMappedExcepti
 
 final class Production implements MapperInterface
 {
-    private const BASE_URL = 'https://developer-api.nest.com';
+    public const BASE_URL = 'https://developer-api.nest.com';
     private const THERMOSTATS_ENDPOINT = '/devices/thermostats';
     private const THERMOSTAT_ENDPOINT = '/devices/thermostats/%s';
     private const PUT_THERMOSTAT_ENDPOINT = '/devices/thermostats/%s';
@@ -39,9 +39,9 @@ final class Production implements MapperInterface
 
     public function map(string $key, ?array $bits = []): string
     {
-        try {
+        if (array_key_exists($key, $this->map)) {
             $url = $this->map[$key];
-        } catch (Exception $exception) {
+        } else {
             throw new EndpointCouldNotBeMappedException(sprintf('key \'%s\' could not be mapped to an URL', $key));
         }
 

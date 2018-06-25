@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LauLamanApps\NestApi\Client\Device\Factory\Camera;
+namespace LauLamanApps\NestApi\Client\Factory\Device\Camera;
 
 use LauLamanApps\NestApi\Client\Device\Camera\Event;
 

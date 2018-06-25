@@ -101,7 +101,7 @@ final class ThermostatCommand implements Command
         return $this->commands;
     }
 
-    public function getId(): string
+    public function getDeviceId(): string
     {
         return $this->thermostatId;
     }

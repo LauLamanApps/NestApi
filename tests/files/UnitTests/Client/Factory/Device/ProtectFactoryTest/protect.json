@@ -1,0 +1,16 @@
+{
+  "name": "Backyard (B4C7)",
+  "locale": "en-US",
+  "structure_id": "bneXA9XGiCsodhqwIcdgEkpnQJKP67pgoa8XhK_IIziNv4vXR0GXkg",
+  "software_version": "1.0.2rc2",
+  "where_id": "v1H46Ty8xdp1WpWCpLD_i6QmUY8QdS0HRhLRy92_VdA-hcIFBgFKRw",
+  "device_id": "1MAclYAa2o8C6xC0gQrJMFEwCyOXzBoQ",
+  "name_long": "Backyard Nest Protect (B4C7)",
+  "is_online": true,
+  "battery_health": "ok",
+  "co_alarm_state": "ok",
+  "smoke_alarm_state": "ok",
+  "ui_color_state": "green",
+  "is_manual_test_active": false,
+  "last_manual_test_time": "2014-10-24T21:13:56.000Z"
+}

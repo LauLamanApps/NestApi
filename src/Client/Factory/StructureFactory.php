@@ -8,11 +8,11 @@ use DateTimeZone;
 use LauLamanApps\NestApi\Client\__shared\AbstractFactory;
 use LauLamanApps\NestApi\Client\Structure;
 use LauLamanApps\NestApi\Client\Structure\Away;
-use LauLamanApps\NestApi\NestClient;
+use LauLamanApps\NestApi\NestClientInterface;
 
 final class StructureFactory extends AbstractFactory implements StructureFactoryInterface
 {
-    public function fromData(array $data, NestClient $client): Structure
+    public function fromData(array $data, NestClientInterface $client): Structure
     {
         return new Structure(
             $this->extractString('structure_id', $data),
@@ -27,34 +27,34 @@ final class StructureFactory extends AbstractFactory implements StructureFactory
         );
     }
 
-    private function extractThermostats(NestClient $client, ?array $thermostatsData): array
+    private function extractThermostats(NestClientInterface $client, ?array $thermostatsData): array
     {
         $thermostatsData = $thermostatsData ?? [];
         $thermostats = [];
         foreach ($thermostatsData as $thermostat) {
-            $thermostats[] = new Structure\ThermostatProxy($client, $thermostat);
+            $thermostats[$thermostat] = new Structure\ThermostatProxy($client, $thermostat);
         }
 
         return $thermostats;
     }
 
-    private function extractProtects(NestClient $client, ?array $protectsData): array
+    private function extractProtects(NestClientInterface $client, ?array $protectsData): array
     {
         $protectsData = $protectsData ?? [];
         $protects = [];
         foreach ($protectsData as $protect) {
-            $protects[] = new Structure\ProtectProxy($client, $protect);
+            $protects[$protect] = new Structure\ProtectProxy($client, $protect);
         }
 
         return $protects;
     }
 
-    private function extractCameras(NestClient $client, ?array $camerasData): array
+    private function extractCameras(NestClientInterface $client, ?array $camerasData): array
     {
         $camerasData = $camerasData ?? [];
         $cameras = [];
         foreach ($camerasData as $camera) {
-            $cameras[] = new Structure\CameraProxy($client, $camera);
+            $cameras[$camera] = new Structure\CameraProxy($client, $camera);
         }
 
         return $cameras;

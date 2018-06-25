@@ -100,7 +100,7 @@ final class Structure
     /**
      * @return ProtectProxy[]
      */
-    public function getSmokeCoAlarms(): array
+    public function getProtects(): array
     {
         return $this->smokeCoAlarms;
     }

@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace LauLamanApps\NestApi;
 
 use LauLamanApps\NestApi\Client\Device\Camera;
-use LauLamanApps\NestApi\Client\Device\Factory\CameraFactoryInterface;
-use LauLamanApps\NestApi\Client\Device\Factory\ProtectFactoryInterface;
-use LauLamanApps\NestApi\Client\Device\Factory\ThermostatFactoryInterface;
 use LauLamanApps\NestApi\Client\Device\Protect;
 use LauLamanApps\NestApi\Client\Device\Thermostat;
+use LauLamanApps\NestApi\Client\Factory\Device\CameraFactoryInterface;
+use LauLamanApps\NestApi\Client\Factory\Device\ProtectFactoryInterface;
+use LauLamanApps\NestApi\Client\Factory\Device\ThermostatFactoryInterface;
 use LauLamanApps\NestApi\Client\Factory\StructureFactoryInterface;
 use LauLamanApps\NestApi\Client\Structure;
 use LauLamanApps\NestApi\Http\ClientInterface;
@@ -17,7 +17,7 @@ use LauLamanApps\NestApi\Http\Command\Command;
 use LauLamanApps\NestApi\Http\Command\ThermostatCommand;
 use LauLamanApps\NestApi\Http\Endpoint\MapperInterface;
 
-final class NestClient
+final class NestClient implements NestClientInterface
 {
     /**
      * @var ClientInterface
@@ -157,7 +157,7 @@ final class NestClient
         if ($command instanceof ThermostatCommand) {
             $this->httpClient->putEndpoint(
                 MapperInterface::THERMOSTAT_PUT,
-                [$command->getId()],
+                [$command->getDeviceId()],
                 $command->getCommands()
             );
         }

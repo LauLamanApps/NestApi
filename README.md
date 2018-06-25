@@ -13,7 +13,7 @@ Installation
 With [composer](http://packagist.org), add:
 
 ```bash
-$ composer require LauLamanApps/nest-api
+$ composer require laulamanapps/nest-api
 ```
 
 Get Access Token
