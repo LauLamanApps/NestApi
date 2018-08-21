@@ -16,6 +16,12 @@ With [composer](http://packagist.org), add:
 $ composer require laulamanapps/nest-api
 ```
 
+if you want to make use of the provided Guzzle adapter, require guzzlehttp in your composer:
+
+```bash
+$ composer require guzzlehttp/guzzle
+```
+
 Get Access Token
 -----
 Sign up at Nest as a Developer and get yourself an `ClientID` and `ClientSecret`
