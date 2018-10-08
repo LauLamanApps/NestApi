@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace LauLamanApps\NestApi;
 
 use LauLamanApps\NestApi\Client\Device\Camera;
-use LauLamanApps\NestApi\Client\Device\Protect;
+use LauLamanApps\NestApi\Client\Device\SmokeCoAlarm;
 use LauLamanApps\NestApi\Client\Device\Thermostat;
 use LauLamanApps\NestApi\Client\Structure;
 use LauLamanApps\NestApi\Http\Command\Command;
@@ -20,11 +20,11 @@ interface NestClientInterface
     public function getThermostat(string $id): Thermostat;
 
     /**
-     * @return Protect[]
+     * @return SmokeCoAlarm[]
      */
-    public function getProtects(): array;
+    public function getSmokeCoAlarms(): array;
 
-    public function getProtect(string $id): Protect;
+    public function getSmokeCoAlarm(string $id): SmokeCoAlarm;
 
     /**
      * @return Camera[]

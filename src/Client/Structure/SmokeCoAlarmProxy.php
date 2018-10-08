@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace LauLamanApps\NestApi\Client\Structure;
 
 use DateTimeImmutable;
-use LauLamanApps\NestApi\Client\Device\Protect\AlarmState;
-use LauLamanApps\NestApi\Client\Device\Protect\BatteryHealth;
-use LauLamanApps\NestApi\Client\Device\Protect\UiColorState;
+use LauLamanApps\NestApi\Client\Device\SmokeCoAlarm\AlarmState;
+use LauLamanApps\NestApi\Client\Device\SmokeCoAlarm\BatteryHealth;
+use LauLamanApps\NestApi\Client\Device\SmokeCoAlarm\UiColorState;
 use LauLamanApps\NestApi\Client\DeviceProxy;
 use LauLamanApps\NestApi\NestClientInterface;
 
@@ -28,10 +28,10 @@ use LauLamanApps\NestApi\NestClientInterface;
  * @method bool isManualTestActive()
  * @method DateTimeImmutable getLastManualTest()
  */
-final class ProtectProxy extends DeviceProxy
+final class SmokeCoAlarmProxy extends DeviceProxy
 {
     protected function __load(NestClientInterface $client, string $deviceId)
     {
-        return $client->getProtect($deviceId);
+        return $client->getSmokeCoAlarm($deviceId);
     }
 }

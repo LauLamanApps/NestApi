@@ -6,17 +6,17 @@ namespace LauLamanApps\NestApi\Client\Factory\Device;
 
 use DateTimeImmutable;
 use LauLamanApps\NestApi\Client\__shared\AbstractFactory;
-use LauLamanApps\NestApi\Client\Device\Protect;
-use LauLamanApps\NestApi\Client\Device\Protect\AlarmState;
-use LauLamanApps\NestApi\Client\Device\Protect\BatteryHealth;
-use LauLamanApps\NestApi\Client\Device\Protect\UiColorState;
+use LauLamanApps\NestApi\Client\Device\SmokeCoAlarm;
+use LauLamanApps\NestApi\Client\Device\SmokeCoAlarm\AlarmState;
+use LauLamanApps\NestApi\Client\Device\SmokeCoAlarm\BatteryHealth;
+use LauLamanApps\NestApi\Client\Device\SmokeCoAlarm\UiColorState;
 use LauLamanApps\NestApi\NestClient;
 
-final class ProtectFactory extends AbstractFactory implements ProtectFactoryInterface
+final class SmokeCoAlarmFactory extends AbstractFactory implements SmokeCoAlarmFactoryInterface
 {
-    public function fromData(array $data): Protect
+    public function fromData(array $data): SmokeCoAlarm
     {
-        return new Protect(
+        return new SmokeCoAlarm(
             $this->extractString('device_id', $data),
             $this->extractString('where_id', $data),
             $this->extractString('structure_id', $data),

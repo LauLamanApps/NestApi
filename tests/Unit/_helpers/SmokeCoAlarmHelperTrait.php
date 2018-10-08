@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace LauLamanApps\NestApi\Tests\Unit\_helpers;
 
 use DateTimeImmutable;
-use LauLamanApps\NestApi\Client\Device\Protect;
-use LauLamanApps\NestApi\Client\Device\Protect\AlarmState;
-use LauLamanApps\NestApi\Client\Device\Protect\BatteryHealth;
-use LauLamanApps\NestApi\Client\Device\Protect\UiColorState;
+use LauLamanApps\NestApi\Client\Device\SmokeCoAlarm;
+use LauLamanApps\NestApi\Client\Device\SmokeCoAlarm\AlarmState;
+use LauLamanApps\NestApi\Client\Device\SmokeCoAlarm\BatteryHealth;
+use LauLamanApps\NestApi\Client\Device\SmokeCoAlarm\UiColorState;
 
-trait ProtectHelperTrait
+trait SmokeCoAlarmHelperTrait
 {
-    protected function getProtectObject(?string $name = ''): Protect
+    protected function getSmokeCoAlarmObject(?string $name = ''): SmokeCoAlarm
     {
-        return new Protect(
+        return new SmokeCoAlarm(
             '',
             '',
             '',

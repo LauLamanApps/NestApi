@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace LauLamanApps\NestApi;
 
 use LauLamanApps\NestApi\Client\Device\Camera;
-use LauLamanApps\NestApi\Client\Device\Protect;
+use LauLamanApps\NestApi\Client\Device\SmokeCoAlarm;
 use LauLamanApps\NestApi\Client\Device\Thermostat;
 use LauLamanApps\NestApi\Client\Factory\Device\CameraFactoryInterface;
-use LauLamanApps\NestApi\Client\Factory\Device\ProtectFactoryInterface;
+use LauLamanApps\NestApi\Client\Factory\Device\SmokeCoAlarmFactoryInterface;
 use LauLamanApps\NestApi\Client\Factory\Device\ThermostatFactoryInterface;
 use LauLamanApps\NestApi\Client\Factory\StructureFactoryInterface;
 use LauLamanApps\NestApi\Client\Structure;
@@ -30,9 +30,9 @@ final class NestClient implements NestClientInterface
     private $thermostatFactory;
 
     /**
-     * @var ProtectFactoryInterface
+     * @var SmokeCoAlarmFactoryInterface
      */
-    private $protectFactory;
+    private $SmokeCoAlarmFactory;
 
     /**
      * @var CameraFactoryInterface
@@ -47,13 +47,13 @@ final class NestClient implements NestClientInterface
     public function __construct(
         ClientInterface $httpClient,
         ThermostatFactoryInterface $thermostatFactory,
-        ProtectFactoryInterface $protectFactory,
+        SmokeCoAlarmFactoryInterface $SmokeCoAlarmFactory,
         CameraFactoryInterface $cameraFactory,
         StructureFactoryInterface $structureFactory
     ) {
         $this->httpClient = $httpClient;
         $this->thermostatFactory = $thermostatFactory;
-        $this->protectFactory = $protectFactory;
+        $this->SmokeCoAlarmFactory = $SmokeCoAlarmFactory;
         $this->cameraFactory = $cameraFactory;
         $this->structureFactory = $structureFactory;
     }
@@ -83,28 +83,28 @@ final class NestClient implements NestClientInterface
     }
 
     /**
-     * @return Protect[]
+     * @return SmokeCoAlarm[]
      */
-    public function getProtects(): array
+    public function getSmokeCoAlarms(): array
     {
-        $json = $this->httpClient->getJson($this->httpClient->getEndpoint(MapperInterface::PROTECTS));
+        $json = $this->httpClient->getJson($this->httpClient->getEndpoint(MapperInterface::SmokeCoAlarmS));
         $data = $this->decodeJsonToArray($json);
 
-        $protects = [];
+        $SmokeCoAlarms = [];
 
-        foreach ($data as $id => $protectData) {
-            $protects[] = $this->protectFactory->fromData($protectData, $this);
+        foreach ($data as $id => $SmokeCoAlarmData) {
+            $SmokeCoAlarms[] = $this->SmokeCoAlarmFactory->fromData($SmokeCoAlarmData, $this);
         }
 
-        return $protects;
+        return $SmokeCoAlarms;
     }
 
-    public function getProtect(string $id): Protect
+    public function getSmokeCoAlarm(string $id): SmokeCoAlarm
     {
-        $json = $this->httpClient->getJson($this->httpClient->getEndpoint(MapperInterface::PROTECT, [$id]));
+        $json = $this->httpClient->getJson($this->httpClient->getEndpoint(MapperInterface::SmokeCoAlarm, [$id]));
         $data = $this->decodeJsonToArray($json);
 
-        return $this->protectFactory->fromData($data, $this);
+        return $this->SmokeCoAlarmFactory->fromData($data, $this);
     }
 
     /**

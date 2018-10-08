@@ -11,8 +11,8 @@ interface MapperInterface
     public const THERMOSTATS = 'thermostats';
     public const THERMOSTAT = 'thermostat';
     public const THERMOSTAT_PUT = 'thermostat-put';
-    public const PROTECTS = 'protects';
-    public const PROTECT = 'protect';
+    public const SmokeCoAlarmS = 'SmokeCoAlarms';
+    public const SmokeCoAlarm = 'SmokeCoAlarm';
     public const CAMERAS = 'cameras';
     public const CAMERA = 'camera';
     public const STRUCTURES = 'structures';

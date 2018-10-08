@@ -7,7 +7,7 @@ namespace LauLamanApps\NestApi\Client;
 use DateTimeZone;
 use LauLamanApps\NestApi\Client\Structure\Away;
 use LauLamanApps\NestApi\Client\Structure\CameraProxy;
-use LauLamanApps\NestApi\Client\Structure\ProtectProxy;
+use LauLamanApps\NestApi\Client\Structure\SmokeCoAlarmProxy;
 use LauLamanApps\NestApi\Client\Structure\ThermostatProxy;
 
 final class Structure
@@ -28,7 +28,7 @@ final class Structure
     private $thermostats;
 
     /**
-     * @var ProtectProxy[]
+     * @var SmokeCoAlarmProxy[]
      */
     private $smokeCoAlarms;
 
@@ -98,9 +98,9 @@ final class Structure
     }
 
     /**
-     * @return ProtectProxy[]
+     * @return SmokeCoAlarmProxy[]
      */
-    public function getProtects(): array
+    public function getSmokeCoAlarms(): array
     {
         return $this->smokeCoAlarms;
     }

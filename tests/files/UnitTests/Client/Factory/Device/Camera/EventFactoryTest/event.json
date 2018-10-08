@@ -1,0 +1,10 @@
+{
+  "has_sound": true,
+  "has_motion": false,
+  "has_person": true,
+  "start_time": "2018-06-14T18:09:41.000Z",
+  "end_time": "2018-06-14T18:09:33.000Z",
+  "urls_expire_time": "2018-08-14T18:09:33.000Z",
+  "web_url": "https://example.com/event/51672278",
+  "app_url": "nestApp://camera/event/51672278"
+}

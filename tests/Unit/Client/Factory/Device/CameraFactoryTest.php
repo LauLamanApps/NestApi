@@ -30,21 +30,22 @@ final class CameraFactoryTest extends TestCase
         }
 
         $factory = new CameraFactory($eventFactory);
-        $thermostat = $factory->fromData($data);
+        $camera = $factory->fromData($data);
 
-        self::assertSame($data['device_id'], $thermostat->getDeviceId());
-        self::assertSame($data['where_id'], $thermostat->getWhereId());
-        self::assertSame($data['structure_id'], $thermostat->getStructureId());
-        self::assertSame($data['name'], $thermostat->getName());
-        self::assertSame($data['name_long'], $thermostat->getNameLong());
-        self::assertSame($data['software_version'], $thermostat->getSoftwareVersion());
-        self::assertSame($data['is_online'], $thermostat->isOnline());
-        self::assertSame($data['is_streaming'], $thermostat->isStreaming());
-        self::assertSame($data['is_audio_input_enabled'], $thermostat->isAudioInputEnabled());
-        self::assertSame($data['last_is_online_change'], $thermostat->getLastIsOnlineChange()->format('Y-m-d\TH:i:s.000\Z'));
-        self::assertSame($data['is_video_history_enabled'], $thermostat->isVideoHistoryEnabled());
-        self::assertSame($data['web_url'], $thermostat->getWebUrl());
-        self::assertSame($data['app_url'], $thermostat->getAppUrl());
+        self::assertSame($data['device_id'], $camera->getDeviceId());
+        self::assertSame($data['where_id'], $camera->getWhereId());
+        self::assertSame($data['structure_id'], $camera->getStructureId());
+        self::assertSame($data['name'], $camera->getName());
+        self::assertSame($data['name_long'], $camera->getNameLong());
+        self::assertSame($data['software_version'], $camera->getSoftwareVersion());
+        self::assertSame($data['is_online'], $camera->isOnline());
+        self::assertSame($data['is_streaming'], $camera->isStreaming());
+        self::assertSame($data['is_audio_input_enabled'], $camera->isAudioInputEnabled());
+        self::assertSame($data['last_is_online_change'], $camera->getLastIsOnlineChange()->format('Y-m-d\TH:i:s.000\Z'));
+        self::assertSame($data['is_video_history_enabled'], $camera->isVideoHistoryEnabled());
+        self::assertSame($data['web_url'], $camera->getWebUrl());
+        self::assertSame($data['app_url'], $camera->getAppUrl());
+        self::assertNull($camera->getLastEvent());
     }
 
     public function getCameraData(): array

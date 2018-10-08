@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace LauLamanApps\NestApi\Client\Device;
 
 use DateTimeImmutable;
-use LauLamanApps\NestApi\Client\Device\Protect\AlarmState;
-use LauLamanApps\NestApi\Client\Device\Protect\BatteryHealth;
-use LauLamanApps\NestApi\Client\Device\Protect\UiColorState;
+use LauLamanApps\NestApi\Client\Device\SmokeCoAlarm\AlarmState;
+use LauLamanApps\NestApi\Client\Device\SmokeCoAlarm\BatteryHealth;
+use LauLamanApps\NestApi\Client\Device\SmokeCoAlarm\UiColorState;
 
-final class Protect
+final class SmokeCoAlarm
 {
     /**
      * @var string

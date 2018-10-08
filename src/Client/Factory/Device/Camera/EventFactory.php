@@ -17,9 +17,9 @@ final class EventFactory extends AbstractFactory implements EventFactoryInterfac
         }
 
         return new Event(
-            new DateTimeImmutable($this->extractString('start_time', $data)),
-            new DateTimeImmutable($this->extractString('end_time', $data)),
-            new DateTimeImmutable($this->extractString('urls_expire_time', $data)),
+            $this->extractDateTimeImmutableOrNull('start_time', $data),
+            $this->extractDateTimeImmutableOrNull('end_time', $data),
+            $this->extractDateTimeImmutableOrNull('urls_expire_time', $data),
             $this->extractBoolean('has_sound', $data),
             $this->extractBoolean('has_motion', $data),
             $this->extractBoolean('has_person', $data),

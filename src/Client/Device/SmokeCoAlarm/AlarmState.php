@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LauLamanApps\NestApi\Client\Device\Protect;
+namespace LauLamanApps\NestApi\Client\Device\SmokeCoAlarm;
 
 use Werkspot\Enum\AbstractEnum;
 

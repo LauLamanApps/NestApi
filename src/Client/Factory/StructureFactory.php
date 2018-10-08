@@ -18,7 +18,7 @@ final class StructureFactory extends AbstractFactory implements StructureFactory
             $this->extractString('structure_id', $data),
             $this->extractString('name', $data),
             $this->extractThermostats($client, $this->extractArrayOrNull('thermostats', $data)),
-            $this->extractProtects($client, $this->extractArrayOrNull('smoke_co_alarms', $data)),
+            $this->extractSmokeCoAlarms($client, $this->extractArrayOrNull('smoke_co_alarms', $data)),
             $this->extractCameras($client, $this->extractArrayOrNull('cameras', $data)),
             $this->extractString('country_code', $data),
             new DateTimeZone($this->extractString('time_zone', $data)),
@@ -38,15 +38,15 @@ final class StructureFactory extends AbstractFactory implements StructureFactory
         return $thermostats;
     }
 
-    private function extractProtects(NestClientInterface $client, ?array $protectsData): array
+    private function extractSmokeCoAlarms(NestClientInterface $client, ?array $SmokeCoAlarmsData): array
     {
-        $protectsData = $protectsData ?? [];
-        $protects = [];
-        foreach ($protectsData as $protect) {
-            $protects[$protect] = new Structure\ProtectProxy($client, $protect);
+        $SmokeCoAlarmsData = $SmokeCoAlarmsData ?? [];
+        $SmokeCoAlarms = [];
+        foreach ($SmokeCoAlarmsData as $SmokeCoAlarm) {
+            $SmokeCoAlarms[$SmokeCoAlarm] = new Structure\SmokeCoAlarmProxy($client, $SmokeCoAlarm);
         }
 
-        return $protects;
+        return $SmokeCoAlarms;
     }
 
     private function extractCameras(NestClientInterface $client, ?array $camerasData): array

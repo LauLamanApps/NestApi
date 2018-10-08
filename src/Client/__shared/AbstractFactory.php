@@ -23,19 +23,9 @@ abstract class AbstractFactory
         return (int)$data[$key];
     }
 
-    protected function extractIntegerOrNull(string $key, array $data): ?int
-    {
-        return (int)$this->extractOrNull($key, $data) ?? null;
-    }
-
     protected function extractFloat(string $key, array $data): float
     {
         return (float)$data[$key];
-    }
-
-    protected function extractFloatOrNull(string $key, array $data): ?float
-    {
-        return (float)$this->extractOrNull($key, $data) ?? null;
     }
 
     protected function extractBoolean(string $key, array $data): bool

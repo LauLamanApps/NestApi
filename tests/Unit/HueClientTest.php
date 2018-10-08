@@ -6,7 +6,7 @@ namespace LauLamanApps\NestApi\Tests\Unit;
 
 use LauLamanApps\NestApi\Client\Device\Thermostat;
 use LauLamanApps\NestApi\Client\Factory\Device\CameraFactoryInterface;
-use LauLamanApps\NestApi\Client\Factory\Device\ProtectFactoryInterface;
+use LauLamanApps\NestApi\Client\Factory\Device\SmokeCoAlarmFactoryInterface;
 use LauLamanApps\NestApi\Client\Factory\Device\ThermostatFactoryInterface;
 use LauLamanApps\NestApi\Client\Factory\StructureFactoryInterface;
 use LauLamanApps\NestApi\Http\ClientInterface;
@@ -14,7 +14,7 @@ use LauLamanApps\NestApi\Http\Command\ThermostatCommand;
 use LauLamanApps\NestApi\Http\Endpoint\MapperInterface;
 use LauLamanApps\NestApi\NestClient;
 use LauLamanApps\NestApi\Tests\Unit\_helpers\CameraHelperTrait;
-use LauLamanApps\NestApi\Tests\Unit\_helpers\ProtectHelperTrait;
+use LauLamanApps\NestApi\Tests\Unit\_helpers\SmokeCoAlarmHelperTrait;
 use LauLamanApps\NestApi\Tests\Unit\_helpers\StructureHelperTrait;
 use LauLamanApps\NestApi\Tests\Unit\_helpers\ThermostatHelperTrait;
 use Mockery;
@@ -28,7 +28,7 @@ final class NestClientTest extends TestCase
     use MockeryPHPUnitIntegration;
 
     use CameraHelperTrait;
-    use ProtectHelperTrait;
+    use SmokeCoAlarmHelperTrait;
     use StructureHelperTrait;
     use ThermostatHelperTrait;
 
@@ -47,11 +47,11 @@ final class NestClientTest extends TestCase
         $adapter->shouldReceive('getJson')->with($response)->once()
             ->andReturn($json);
         $thermostatFactory = $this->getThermostatFactory();
-        $protectFactory = $this->getProtectFactory();
+        $SmokeCoAlarmFactory = $this->getSmokeCoAlarmFactory();
         $cameraFactory = $this->getCameraFactory();
         $structureFactory = $this->getStructureFactory();
 
-        $client = new NestClient($adapter, $thermostatFactory, $protectFactory, $cameraFactory, $structureFactory);
+        $client = new NestClient($adapter, $thermostatFactory, $SmokeCoAlarmFactory, $cameraFactory, $structureFactory);
 
         foreach ($data as $subData) {
             $thermostatFactory->shouldReceive('fromData')->with($subData, $client)->once()
@@ -81,11 +81,11 @@ final class NestClientTest extends TestCase
         $adapter->shouldReceive('getJson')->with($response)->once()
             ->andReturn($json);
         $thermostatFactory = $this->getThermostatFactory();
-        $protectFactory = $this->getProtectFactory();
+        $SmokeCoAlarmFactory = $this->getSmokeCoAlarmFactory();
         $cameraFactory = $this->getCameraFactory();
         $structureFactory = $this->getStructureFactory();
 
-        $client = new NestClient($adapter, $thermostatFactory, $protectFactory, $cameraFactory, $structureFactory);
+        $client = new NestClient($adapter, $thermostatFactory, $SmokeCoAlarmFactory, $cameraFactory, $structureFactory);
 
         $thermostatFactory->shouldReceive('fromData')->with($data, $client)->once()
             ->andReturn($this->getThermostatObject($client, $data[0]));
@@ -98,64 +98,64 @@ final class NestClientTest extends TestCase
     /**
      * @test
      */
-    public function getProtects(): void
+    public function getSmokeCoAlarms(): void
     {
         $response = $this->getResponse();
-        $data = [['protect1'], ['protect2'], ['protect3']];
+        $data = [['SmokeCoAlarm1'], ['SmokeCoAlarm2'], ['SmokeCoAlarm3']];
         $json = json_encode($data);
 
         $adapter = $this->getAdapter();
-        $adapter->shouldReceive('getEndpoint')->with(MapperInterface::PROTECTS)->once()
+        $adapter->shouldReceive('getEndpoint')->with(MapperInterface::SmokeCoAlarmS)->once()
             ->andReturn($response);
         $adapter->shouldReceive('getJson')->with($response)->once()
             ->andReturn($json);
         $thermostatFactory = $this->getThermostatFactory();
-        $protectFactory = $this->getProtectFactory();
+        $SmokeCoAlarmFactory = $this->getSmokeCoAlarmFactory();
         $cameraFactory = $this->getCameraFactory();
         $structureFactory = $this->getStructureFactory();
 
-        $client = new NestClient($adapter, $thermostatFactory, $protectFactory, $cameraFactory, $structureFactory);
+        $client = new NestClient($adapter, $thermostatFactory, $SmokeCoAlarmFactory, $cameraFactory, $structureFactory);
 
         foreach ($data as $subData) {
-            $protectFactory->shouldReceive('fromData')->with($subData, $client)->once()
-                ->andReturn($this->getProtectObject($subData[0]));
+            $SmokeCoAlarmFactory->shouldReceive('fromData')->with($subData, $client)->once()
+                ->andReturn($this->getSmokeCoAlarmObject($subData[0]));
         }
 
-        $protects = $client->getProtects();
+        $SmokeCoAlarms = $client->getSmokeCoAlarms();
 
-        foreach ($protects as $protect) {
-            self::assertTrue($this->in_array_r($protect->getName(), $data));
+        foreach ($SmokeCoAlarms as $SmokeCoAlarm) {
+            self::assertTrue($this->in_array_r($SmokeCoAlarm->getName(), $data));
         }
     }
 
     /**
      * @test
      */
-    public function getProtect(): void
+    public function getSmokeCoAlarm(): void
     {
         $response = $this->getResponse();
-        $id = 'protectId';
-        $data = ['protect1'];
+        $id = 'SmokeCoAlarmId';
+        $data = ['SmokeCoAlarm1'];
         $json = json_encode($data);
 
         $adapter = $this->getAdapter();
-        $adapter->shouldReceive('getEndpoint')->with(MapperInterface::PROTECT, [$id])->once()
+        $adapter->shouldReceive('getEndpoint')->with(MapperInterface::SmokeCoAlarm, [$id])->once()
             ->andReturn($response);
         $adapter->shouldReceive('getJson')->with($response)->once()
             ->andReturn($json);
         $thermostatFactory = $this->getThermostatFactory();
-        $protectFactory = $this->getProtectFactory();
+        $SmokeCoAlarmFactory = $this->getSmokeCoAlarmFactory();
         $cameraFactory = $this->getCameraFactory();
         $structureFactory = $this->getStructureFactory();
 
-        $client = new NestClient($adapter, $thermostatFactory, $protectFactory, $cameraFactory, $structureFactory);
+        $client = new NestClient($adapter, $thermostatFactory, $SmokeCoAlarmFactory, $cameraFactory, $structureFactory);
 
-        $protectFactory->shouldReceive('fromData')->with($data, $client)->once()
-            ->andReturn($this->getProtectObject($data[0]));
+        $SmokeCoAlarmFactory->shouldReceive('fromData')->with($data, $client)->once()
+            ->andReturn($this->getSmokeCoAlarmObject($data[0]));
 
-        $protect = $client->getProtect($id);
+        $SmokeCoAlarm = $client->getSmokeCoAlarm($id);
 
-        self::assertTrue($this->in_array_r($protect->getName(), $data));
+        self::assertTrue($this->in_array_r($SmokeCoAlarm->getName(), $data));
     }
 
     /**
@@ -173,11 +173,11 @@ final class NestClientTest extends TestCase
         $adapter->shouldReceive('getJson')->with($response)->once()
             ->andReturn($json);
         $thermostatFactory = $this->getThermostatFactory();
-        $protectFactory = $this->getProtectFactory();
+        $SmokeCoAlarmFactory = $this->getSmokeCoAlarmFactory();
         $cameraFactory = $this->getCameraFactory();
         $structureFactory = $this->getStructureFactory();
 
-        $client = new NestClient($adapter, $thermostatFactory, $protectFactory, $cameraFactory, $structureFactory);
+        $client = new NestClient($adapter, $thermostatFactory, $SmokeCoAlarmFactory, $cameraFactory, $structureFactory);
 
         foreach ($data as $subData) {
             $cameraFactory->shouldReceive('fromData')->with($subData, $client)->once()
@@ -207,11 +207,11 @@ final class NestClientTest extends TestCase
         $adapter->shouldReceive('getJson')->with($response)->once()
             ->andReturn($json);
         $thermostatFactory = $this->getThermostatFactory();
-        $protectFactory = $this->getProtectFactory();
+        $SmokeCoAlarmFactory = $this->getSmokeCoAlarmFactory();
         $cameraFactory = $this->getCameraFactory();
         $structureFactory = $this->getStructureFactory();
 
-        $client = new NestClient($adapter, $thermostatFactory, $protectFactory, $cameraFactory, $structureFactory);
+        $client = new NestClient($adapter, $thermostatFactory, $SmokeCoAlarmFactory, $cameraFactory, $structureFactory);
 
         $cameraFactory->shouldReceive('fromData')->with($data, $client)->once()
             ->andReturn($this->getCameraObject($data[0]));
@@ -236,11 +236,11 @@ final class NestClientTest extends TestCase
         $adapter->shouldReceive('getJson')->with($response)->once()
             ->andReturn($json);
         $thermostatFactory = $this->getThermostatFactory();
-        $protectFactory = $this->getProtectFactory();
+        $SmokeCoAlarmFactory = $this->getSmokeCoAlarmFactory();
         $cameraFactory = $this->getCameraFactory();
         $structureFactory = $this->getStructureFactory();
 
-        $client = new NestClient($adapter, $thermostatFactory, $protectFactory, $cameraFactory, $structureFactory);
+        $client = new NestClient($adapter, $thermostatFactory, $SmokeCoAlarmFactory, $cameraFactory, $structureFactory);
 
         foreach ($data as $subData) {
             $structureFactory->shouldReceive('fromData')->with($subData, $client)->once()
@@ -262,11 +262,11 @@ final class NestClientTest extends TestCase
         $id = 'thermostatId';
         $adapter = $this->getAdapter();
         $thermostatFactory = $this->getThermostatFactory();
-        $protectFactory = $this->getProtectFactory();
+        $SmokeCoAlarmFactory = $this->getSmokeCoAlarmFactory();
         $cameraFactory = $this->getCameraFactory();
         $structureFactory = $this->getStructureFactory();
 
-        $client = new NestClient($adapter, $thermostatFactory, $protectFactory, $cameraFactory, $structureFactory);
+        $client = new NestClient($adapter, $thermostatFactory, $SmokeCoAlarmFactory, $cameraFactory, $structureFactory);
 
         $command = new ThermostatCommand($id);
         $command->setTargetTemperature(Thermostat\Temperature::celsius(10));
@@ -302,11 +302,11 @@ final class NestClientTest extends TestCase
     }
 
     /**
-     * @return MockInterface|ProtectFactoryInterface
+     * @return MockInterface|SmokeCoAlarmFactoryInterface
      */
-    private function getProtectFactory()
+    private function getSmokeCoAlarmFactory()
     {
-        return Mockery::mock(ProtectFactoryInterface::class);
+        return Mockery::mock(SmokeCoAlarmFactoryInterface::class);
     }
 
     /**

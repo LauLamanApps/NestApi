@@ -9,15 +9,15 @@ help:
 fix-code-standards:
 	./vendor/bin/php-cs-fixer fix --verbose
 
-test:
-	$(MAKE) test-unit
-	$(MAKE) test-integration
+tests:
+	$(MAKE) tests-unit
+	$(MAKE) tests-integration
 
-test-coverage:
+tests-coverage:
 	rm -rf coverage; ./vendor/bin/phpunit --coverage-html=coverage/ --coverage-clover=coverage/clover.xml
 
-test-integration:
+tests-integration:
 	./vendor/bin/phpunit --testsuite integration
 
-test-unit:
+tests-unit:
 	./vendor/bin/phpunit --testsuite unit

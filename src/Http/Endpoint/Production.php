@@ -13,8 +13,8 @@ final class Production implements MapperInterface
     private const THERMOSTATS_ENDPOINT = '/devices/thermostats';
     private const THERMOSTAT_ENDPOINT = '/devices/thermostats/%s';
     private const PUT_THERMOSTAT_ENDPOINT = '/devices/thermostats/%s';
-    private const PROTECTS_ENDPOINT = '/devices/smoke_co_alarms';
-    private const PROTECT_ENDPOINT = '/devices/smoke_co_alarms/%s';
+    private const SmokeCoAlarmS_ENDPOINT = '/devices/smoke_co_alarms';
+    private const SmokeCoAlarm_ENDPOINT = '/devices/smoke_co_alarms/%s';
     private const CAMERAS_ENDPOINT = '/devices/cameras';
     private const CAMERA_ENDPOINT = '/devices/cameras/%s';
     private const STRUCTURES_ENDPOINT = '/structures';
@@ -28,8 +28,8 @@ final class Production implements MapperInterface
             MapperInterface::THERMOSTATS => self::BASE_URL . self::THERMOSTATS_ENDPOINT,
             MapperInterface::THERMOSTAT => self::BASE_URL . self::THERMOSTAT_ENDPOINT,
             MapperInterface::THERMOSTAT_PUT => self::BASE_URL . self::PUT_THERMOSTAT_ENDPOINT,
-            MapperInterface::PROTECTS => self::BASE_URL . self::PROTECTS_ENDPOINT,
-            MapperInterface::PROTECT => self::BASE_URL . self::PROTECT_ENDPOINT,
+            MapperInterface::SmokeCoAlarmS => self::BASE_URL . self::SmokeCoAlarmS_ENDPOINT,
+            MapperInterface::SmokeCoAlarm => self::BASE_URL . self::SmokeCoAlarm_ENDPOINT,
             MapperInterface::CAMERAS => self::BASE_URL . self::CAMERAS_ENDPOINT,
             MapperInterface::CAMERA => self::BASE_URL . self::CAMERA_ENDPOINT,
             MapperInterface::STRUCTURES => self::BASE_URL . self::STRUCTURES_ENDPOINT,

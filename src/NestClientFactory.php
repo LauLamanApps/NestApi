@@ -9,7 +9,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use LauLamanApps\NestApi\Client\Factory\Device\Camera\EventFactory;
 use LauLamanApps\NestApi\Client\Factory\Device\CameraFactory;
-use LauLamanApps\NestApi\Client\Factory\Device\ProtectFactory;
+use LauLamanApps\NestApi\Client\Factory\Device\SmokeCoAlarmFactory;
 use LauLamanApps\NestApi\Client\Factory\Device\ThermostatFactory;
 use LauLamanApps\NestApi\Client\Factory\StructureFactory;
 use LauLamanApps\NestApi\Http\Adapter\Guzzle\Client as GuzzleClient;
@@ -24,7 +24,7 @@ final class NestClientFactory
         return new NestClient(
             self::createHttpClient($accessToken),
             new ThermostatFactory(),
-            new ProtectFactory(),
+            new SmokeCoAlarmFactory(),
             new CameraFactory(
                 new EventFactory()
             ),

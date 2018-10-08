@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace LauLamanApps\NestApi\Tests\Unit\Client\Factory;
 
 use LauLamanApps\NestApi\Client\Device\Camera;
-use LauLamanApps\NestApi\Client\Device\Protect;
+use LauLamanApps\NestApi\Client\Device\SmokeCoAlarm;
 use LauLamanApps\NestApi\Client\Device\Thermostat;
 use LauLamanApps\NestApi\Client\Factory\StructureFactory;
 use LauLamanApps\NestApi\Client\Structure\CameraProxy;
-use LauLamanApps\NestApi\Client\Structure\ProtectProxy;
+use LauLamanApps\NestApi\Client\Structure\SmokeCoAlarmProxy;
 use LauLamanApps\NestApi\Client\Structure\ThermostatProxy;
 use LauLamanApps\NestApi\NestClientInterface;
 use LauLamanApps\NestApi\Tests\Unit\_helpers\CameraHelperTrait;
-use LauLamanApps\NestApi\Tests\Unit\_helpers\ProtectHelperTrait;
+use LauLamanApps\NestApi\Tests\Unit\_helpers\SmokeCoAlarmHelperTrait;
 use LauLamanApps\NestApi\Tests\Unit\_helpers\TestDataLoaderTrait;
 use LauLamanApps\NestApi\Tests\Unit\_helpers\ThermostatHelperTrait;
 use Mockery\MockInterface;
@@ -23,7 +23,7 @@ final class StructureFactoryTest extends TestCase
 {
     use TestDataLoaderTrait;
     use CameraHelperTrait;
-    use ProtectHelperTrait;
+    use SmokeCoAlarmHelperTrait;
     use ThermostatHelperTrait;
 
     protected const TEST_FILES_DIR = __DIR__ . '/../../../files/UnitTests/Client/Factory/StructureFactoryTest/';
@@ -33,7 +33,7 @@ final class StructureFactoryTest extends TestCase
      */
     private $clientInterface;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->clientInterface = \Mockery::mock(NestClientInterface::class);
     }
@@ -52,13 +52,16 @@ final class StructureFactoryTest extends TestCase
         self::assertSame($data['country_code'], $structure->getCountryCode());
         self::assertSame($data['time_zone'], $structure->getTimeZone()->getName());
         self::assertSame($data['away'], $structure->getAway()->getValue());
+        self::assertSame($data['rhr_enrollment'], $structure->isRhrEnrollment());
+
+
 
         if (isset($data['cameras'])) {
             self::assertCameras($data['cameras'], $structure->getCameras());
         }
 
         if (isset($data['smoke_co_alarms'])) {
-            self::assertProtects($data['smoke_co_alarms'], $structure->getProtects());
+            self::assertSmokeCoAlarms($data['smoke_co_alarms'], $structure->getSmokeCoAlarms());
         }
 
         if (isset($data['thermostats'])) {
@@ -84,20 +87,20 @@ final class StructureFactoryTest extends TestCase
     }
 
     /**
-     * @param array $expectedProtects
-     * @param Protect[]|ProtectProxy[] $actualProtects
+     * @param array $expectedSmokeCoAlarms
+     * @param SmokeCoAlarm[]|SmokeCoAlarmProxy[] $actualSmokeCoAlarms
      */
-    private function assertProtects(array $expectedProtects, array $actualProtects): void
+    private function assertSmokeCoAlarms(array $expectedSmokeCoAlarms, array $actualSmokeCoAlarms): void
     {
         $count = 0;
-        foreach ($expectedProtects as $expectedProtect) {
-            self::assertInstanceOf(ProtectProxy::class, $actualProtects[$expectedProtect]);
-            $this->clientInterface->shouldReceive('getProtect')->with($expectedProtect)->andReturn($this->getProtectObject());
-            $actualProtects[$expectedProtect]->getDeviceId();
+        foreach ($expectedSmokeCoAlarms as $expectedSmokeCoAlarm) {
+            self::assertInstanceOf(SmokeCoAlarmProxy::class, $actualSmokeCoAlarms[$expectedSmokeCoAlarm]);
+            $this->clientInterface->shouldReceive('getSmokeCoAlarm')->with($expectedSmokeCoAlarm)->andReturn($this->getSmokeCoAlarmObject());
+            $actualSmokeCoAlarms[$expectedSmokeCoAlarm]->getDeviceId();
             $count++;
         }
 
-        self::assertSame(count($expectedProtects), $count, 'looks like the amount of Protect objects does not match up');
+        self::assertSame(count($expectedSmokeCoAlarms), $count, 'looks like the amount of SmokeCoAlarm objects does not match up');
     }
 
     /**
@@ -121,7 +124,7 @@ final class StructureFactoryTest extends TestCase
     {
         return [
             'only cameras' => [$this->getDataFromFile('only_cameras.json')],
-            'only protects' => [$this->getDataFromFile('only_protects.json')],
+            'only smoke co alarms' => [$this->getDataFromFile('only_smoke_co_alarms.json')],
             'only thermostats' => [$this->getDataFromFile('only_thermostats.json')],
             'all devices' => [$this->getDataFromFile('all_devices.json')],
         ];

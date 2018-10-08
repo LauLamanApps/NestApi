@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace LauLamanApps\NestApi\Client;
 
 use LauLamanApps\NestApi\Client\Device\Camera;
-use LauLamanApps\NestApi\Client\Device\Protect;
+use LauLamanApps\NestApi\Client\Device\SmokeCoAlarm;
 use LauLamanApps\NestApi\Client\Device\Thermostat;
 use LauLamanApps\NestApi\Client\Structure\CameraProxy;
-use LauLamanApps\NestApi\Client\Structure\ProtectProxy;
+use LauLamanApps\NestApi\Client\Structure\SmokeCoAlarmProxy;
 use LauLamanApps\NestApi\Client\Structure\ThermostatProxy;
 use LauLamanApps\NestApi\NestClientInterface;
 
@@ -25,12 +25,12 @@ abstract class DeviceProxy
     private $__deviceId;
 
     /**
-     * @var null|Thermostat|Protect|Camera
+     * @var null|Thermostat|SmokeCoAlarm|Camera
      */
     private $__device;
 
     /**
-     * @return ThermostatProxy|ProtectProxy|CameraProxy
+     * @return ThermostatProxy|SmokeCoAlarmProxy|CameraProxy
      */
     public function __construct(NestClientInterface $client, $deviceId)
     {
@@ -39,7 +39,7 @@ abstract class DeviceProxy
     }
 
     /**
-     * @return Thermostat|Protect|Camera
+     * @return Thermostat|SmokeCoAlarm|Camera
      */
     abstract protected function __load(NestClientInterface $client, string $deviceId);
 
