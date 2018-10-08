@@ -1,0 +1,166 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+final class Command
+{
+    /**
+     * @var string
+     */
+    private $clientId;
+
+    /**
+     * @var string
+     */
+    private $clientSecret;
+
+    public function run(): void
+    {
+        echo "\e[35m**************************************************************\e[0m" . PHP_EOL;
+        echo "\e[35m**             LAULAMANAPPS NEST API TOKEN FETCHER          **\e[0m" . PHP_EOL;
+        echo "\e[35m**                                                          **\e[0m" . PHP_EOL;
+        echo "\e[35m**           Please Follow the \e[32minstructions\e[35m below           **\e[0m" . PHP_EOL;
+        echo "\e[35m**************************************************************\e[0m" . PHP_EOL;
+        echo "";
+
+        $this->validateCurlAvailable();
+
+        echo "Please create a OAuth Client: https://console.developers.nest.com/products";
+        $this->waitForEnter(" hit \e[32menter\e[0m when done.");
+
+        $this->getClientInformation();
+
+        $this->authorizePincode();
+    }
+
+    protected function getClientInformation(): void
+    {
+        $this->clientId = $this->prompt("Enter \e[32mClient ID\e[0m: ");
+        $this->clientSecret = $this->prompt("Enter \e[32mClient Secret\e[0m: ");
+    }
+
+    private function authorizePincode(): void
+    {
+        echo sprintf("Please go to %s in your browser.\nLogin with the nest account you want to access,\n",
+            $this->getAuthorizationUrl()
+        );
+
+        $pincode = $this->prompt("Enter \e[32mpincode\e[0m:");
+
+        $this->getToken($pincode);
+    }
+
+    private function getToken(string $code): void
+    {
+        $response = $this->makeRequest($code);
+
+        if (isset($response['error'])) {
+            $this->parseError($response);
+        }
+
+        $this->parseAccessToken($response);
+    }
+
+    private function makeRequest(string $code): array
+    {
+        $payload = sprintf(
+            'code=%s&client_id=%s&client_secret=%s&grant_type=%s',
+            $code,
+            $this->clientId,
+            $this->clientSecret,
+            'authorization_code'
+        );
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, "https://api.home.nest.com/oauth2/access_token");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $curlOutput = curl_exec($ch);
+
+        if ($errorNo = curl_errno($ch)) {
+            $errorMessage = curl_strerror($errorNo);
+            throw new Exception($errorMessage, $errorNo);
+        }
+
+        curl_close($ch);
+
+        return json_decode($curlOutput, true);
+    }
+
+    private function parseAccessToken(array $response): void
+    {
+        echo sprintf("Your access token is \e[32m'%s'\e[0m.\nThis token expires: %s",
+            $response['access_token'],
+            (new DateTime("+{$response['expires_in']} seconds"))->format('Y-m-d H:i:s')
+        );
+
+        die("\n");
+    }
+
+    private function parseError(array $response): void
+    {
+        echo sprintf(
+            "\n\e[31mError: %s\e[0m, instance id: %s\n\nTRY AGAIN\n\n",
+            $response['error_description'],
+            $response['instance_id']
+        );
+
+        if ($response['error'] === 'client_not_active') {
+            $this->getClientInformation();
+            $this->authorizePincode();
+        }
+        if ($response['error'] === 'oauth2_error') {
+            $this->authorizePincode();
+        }
+    }
+
+    private function getAuthorizationUrl()
+    {
+        return sprintf('https://home.nest.com/login/oauth2?client_id=%s&state=STATE', $this->clientId);
+    }
+
+    private function validateCurlAvailable(): void
+    {
+        if (!function_exists('curl_version')) {
+            echo "\e[31mCRITICAL: curl not installed.\e[0m" . PHP_EOL;
+
+            die();
+        }
+    }
+
+    private function waitForEnter(string $title): void
+    {
+        readline($title);
+    }
+
+
+    private function confirm(string $title): bool
+    {
+        $input = readline(sprintf('%s [Y/n]', $title));
+
+        if (!$input || $input === 'y' || $input === 'Y') {
+            return true;
+        } elseif ($input === 'n' || $input === 'N') {
+            return false;
+        }
+
+        return $this->confirm($title);
+    }
+
+    private function prompt(string $title): string
+    {
+        if (!$input = readline($title)) {
+            return $this->prompt($title);
+        }
+
+        return $input;
+    }
+}
+
+$command = new Command();
+$command->run();
