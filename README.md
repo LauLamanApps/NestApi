@@ -60,9 +60,9 @@ This package comes with 2 types of tests: Unit and Integration.
 To run them you can use the make commands in the projects root.
 
 ```bash
-$ makes test # Runs all tests
-$ makes test-unit # Runs only unit tests
-$ makes test-integration # Runs only integration tests
+$ make tests # Runs all tests
+$ make tests-unit # Runs only unit tests
+$ make tests-integration # Runs only integration tests
 ```
 
 Author
